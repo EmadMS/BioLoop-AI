@@ -1,0 +1,32 @@
+:root { --accent: #00ff88; --dark: #050a10; --glass: rgba(255,255,255,0.05); }
+
+body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: var(--dark); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(0,0,0,0.5); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; z-index: 1000; }
+.logo span { color: var(--accent); font-weight: 900; letter-spacing: 2px; }
+
+/* Full-Screen Containers */
+.hero-full, .main-content, .dashboard-container, .report-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 50px; box-sizing: border-box; }
+
+/* Typography & Buttons */
+h1 { font-size: 4rem; margin: 0; }
+.accent-text { color: var(--accent); }
+.btn-main { background: var(--accent); color: black; border: none; padding: 20px 50px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.2rem; transition: 0.3s; margin-top: 30px; }
+.btn-main:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--accent); }
+
+/* Grid Systems */
+.entry-grid, .summary-grid, .report-grid { display: grid; gap: 30px; width: 100%; max-width: 1400px; }
+.entry-grid { grid-template-columns: repeat(3, 1fr); }
+.summary-grid { grid-template-columns: 1fr 1fr; }
+.report-grid { grid-template-columns: 1.2fr 1fr; align-items: start; text-align: left; }
+
+/* Glass Cards */
+.glass-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 30px; backdrop-filter: blur(20px); width: 100%; box-sizing: border-box; }
+.calculation-box { background: rgba(0,255,136,0.1); padding: 30px; border-radius: 20px; border: 1px dashed var(--accent); margin-top: 25px; }
+
+/* Loader */
+.spinner-large { width: 100px; height: 100px; border: 10px solid rgba(255,255,255,0.1); border-top: 10px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.progress-container { width: 500px; height: 12px; background: rgba(255,255,255,0.1); border-radius: 20px; margin: 40px 0; overflow: hidden; }
+#fill { height: 100%; width: 0; background: var(--accent); box-shadow: 0 0 20px var(--accent); }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BioLoop | Social Audit</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --accent: #00ff88; --dark: #050a10; }
+        body { background: var(--dark); color: white; font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .report-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; width: 90%; max-width: 1400px; }
+        .card { background: rgba(255,255,255,0.05); padding: 50px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); }
+        .box { background: rgba(0, 255, 136, 0.1); padding: 30px; border-radius: 20px; border: 1px dashed var(--accent); margin-top: 20px; }
+        h1 { font-size: 3.5rem; margin: 0; }
+        .accent { color: var(--accent); }
+        button { background: var(--accent); border: none; padding: 12px 35px; border-radius: 25px; cursor: pointer; font-weight: bold; position: absolute; top: 30px; left: 30px; transition: 0.3s; }
+        button:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <button onclick="history.back()">← BACK TO DASHBOARD</button>
+    <div class="report-grid">
+        <div class="card">
+            <h1>Social <span class="accent">Impact</span></h1>
+            <p><strong>AI Analysis:</strong> Quantifying community resource redirection. This data supports the <strong>Social</strong> pillar of your ESG strategy.</p>
+            <div class="box">
+                <p>Total Weight Recovered: <span id="s-win">0</span>kg</p>
+                <p>Redistribution Factor: 1.5 Meals/kg</p>
+                <hr>
+                <h2 class="accent">Total Meals Provided: <span id="s-out">0</span></h2>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Stream Contribution</h3>
+            <canvas id="socialPie" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <script>
+        const data = JSON.parse(localStorage.getItem('multiBioData')) || {};
+        let b = data.b?.w || 0, p = data.p?.w || 0, c = data.c?.w || 0;
+        document.getElementById('s-win').innerText = (b + p + c).toFixed(1);
+        document.getElementById('s-out').innerText = Math.floor((b + p + c) * 1.5);
+
+        new Chart(document.getElementById('socialPie'), {
+            type: 'pie',
+            data: {
+                labels: ['Bakery', 'Produce', 'Canned'],
+                datasets: [{
+                    data: [b, p, c],
+                    backgroundColor: ['#00ff88', '#00cc66', '#006633'],
+                    borderWidth: 0
+                }]
+            },
+            options: { plugins: { legend: { labels: { color: 'white', font: { size: 18 } } } } }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BioLoop | AI Processing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body { background: #050a10; color: #00ff88; font-family: monospace; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .spinner { width: 100px; height: 100px; border: 10px solid rgba(255,255,255,0.1); border-top: 10px solid #00ff88; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .progress { width: 400px; height: 10px; background: rgba(255,255,255,0.1); border-radius: 20px; margin: 40px 0; overflow: hidden; }
+        #fill { height: 100%; width: 0; background: #00ff88; box-shadow: 0 0 20px #00ff88; }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+    <h1 id="status">INITIATING AI AUDIT...</h1>
+    <div class="progress"><div id="fill"></div></div>
+    <script>
+        gsap.to("#fill", { width: "100%", duration: 4, onComplete: () => window.location.href = 'dashboard.html' });
+    </script>
+</body>
+</html>

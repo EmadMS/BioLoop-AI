@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BioLoop | CO2 Audit</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: #050a10; color: white; font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        .report-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; width: 90%; max-width: 1400px; }
+        .card { background: rgba(255,255,255,0.05); padding: 50px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1); }
+        .box { background: rgba(0, 255, 136, 0.1); padding: 30px; border-radius: 20px; border: 1px dashed #00ff88; margin-top: 20px; }
+        h1 { font-size: 3.5rem; margin-top: 0; }
+        .accent { color: #00ff88; }
+        button { background: #00ff88; border: none; padding: 10px 30px; border-radius: 20px; cursor: pointer; font-weight: bold; position: absolute; top: 30px; left: 30px; }
+    </style>
+</head>
+<body>
+    <button onclick="history.back()">← BACK TO DASHBOARD</button>
+    <div class="report-grid">
+        <div class="card">
+            <h1>Carbon <span class="accent">Audit</span></h1>
+            <p><strong>AI Analysis:</strong> Calculating methane prevention through upcycling[cite: 138, 140].</p>
+            <div class="box">
+                <p>Weight Entry: <span id="win">0</span>kg</p>
+                <p>Multiplier: 2.5x CO2e</p>
+                <hr>
+                <h2 class="accent">Total Offset: <span id="cout">0</span>kg</h2>
+            </div>
+        </div>
+        <div class="card"><canvas id="pie"></canvas></div>
+    </div>
+    <script>
+        const data = JSON.parse(localStorage.getItem('multiBioData')) || {};
+        let b = data.b?.w || 0, p = data.p?.w || 0, c = data.c?.w || 0;
+        document.getElementById('win').innerText = b+p+c;
+        document.getElementById('cout').innerText = ((b+p+c) * 2.5).toFixed(1);
+        new Chart(document.getElementById('pie'), {
+            type: 'pie',
+            data: { labels: ['Bakery', 'Produce', 'Canned'], datasets: [{ data: [b, p, c], backgroundColor: ['#00ff88', '#00cc66', '#006633'], borderWidth: 0 }] },
+            options: { plugins: { legend: { labels: { color: 'white', font: { size: 18 } } } } }
+        });
+    </script>
+</body>
+</html>
